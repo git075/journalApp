@@ -43,7 +43,7 @@ public class WhetherService {
             ResponseEntity<WhetherApiResponse> response = restTemplate.exchange(finalUrl, HttpMethod.GET, null, WhetherApiResponse.class);
             WhetherApiResponse body = response.getBody();
             if(body!=null){
-                redisService.set("Whether of " + city,body, 300L );
+                redisService.set("Whether of_ " + city,body, 300L );
             }
             return body;
         }
