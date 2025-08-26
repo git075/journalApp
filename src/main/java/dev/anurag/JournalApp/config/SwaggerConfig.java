@@ -5,8 +5,11 @@ import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
+import io.swagger.v3.oas.models.servers.Server;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.Arrays;
 
 @Configuration
 public class SwaggerConfig {
@@ -18,7 +21,9 @@ public class SwaggerConfig {
                         .title("Journal App API's")
                         .description("API documentation for Journal App by JAAT")
                         .version("v1.0")
-                        .license(new License().name("Apache 2.0").url("http://springdoc.org")));
+                        .license(new License().name("Apache 2.0").url("http://springdoc.org")))
+                .servers(Arrays.asList(new Server().url("http://localhost:8080").description("local"),
+                         new Server().url("http://localhost:8081").description("prod")));
     }
 
 }
