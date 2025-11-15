@@ -43,6 +43,7 @@ public class PublicController {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody Users user){
+        //I will write login attempt limitter and blocking user logic here later.
         try{
             Authentication authenticate = authenticationManager.authenticate
                     (new UsernamePasswordAuthenticationToken(user.getUserName(), user.getPassword()));
