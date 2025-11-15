@@ -21,7 +21,7 @@ import java.io.IOException;
 @Component
 public class JwtFilter  extends OncePerRequestFilter{
     @Autowired
-    private UserDetailsService userDetailsService;
+    private UserDetailsService userDetailsService;  //we have implemented this interface in userdetailsimpl class but then also autowiring the interface. Why? Beacuse of polymorphism and best practice.
 
     @Autowired
     private JwtUtil jwtUtil;
@@ -54,3 +54,60 @@ public class JwtFilter  extends OncePerRequestFilter{
         chain.doFilter(request, response);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+User logs in → send email + password
+
+Authenticate using Spring AuthenticationManager
+
+Generate JWT with email + custom fields
+
+Client sends request with Bearer token
+
+JwtFilter extracts email from token
+
+Load user using loadUserByUsername(email)
+
+Set authentication in SecurityContextHolder
+
+Controller gets logged in user using:
+* */
