@@ -3,6 +3,7 @@ package dev.anurag.JournalApp.config;
 
 
 import dev.anurag.JournalApp.JournalAppApplication;
+import dev.anurag.JournalApp.auth.CustomAuthenticationProvider;
 import dev.anurag.JournalApp.filter.JwtFilter;
 import dev.anurag.JournalApp.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,9 @@ public class SpringSecurity {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private CustomAuthenticationProvider customAuthenticationProvider;
+
 
 
 
@@ -56,6 +60,7 @@ public class SpringSecurity {
     }
 
 
+    /*
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
@@ -65,6 +70,22 @@ public class SpringSecurity {
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration auth) throws Exception {
         return auth.getAuthenticationManager();
+    }
+
+
+     */
+
+
+    @Bean
+    public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
+
+        AuthenticationManagerBuilder authBuilder =
+                http.getSharedObject(AuthenticationManagerBuilder.class);
+
+        authBuilder.authenticationProvider(customAuthenticationProvider); //Because iam using customAuthenticationProvider and not springs inbuilt
+
+        return authBuilder.build();
+
     }
 
 
