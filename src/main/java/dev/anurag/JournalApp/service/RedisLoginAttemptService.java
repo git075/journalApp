@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class RedisLoginAttemptService {
 
-    private static final String ATTEMPT_PREFIX = "login_attempts";
+    private static final String ATTEMPT_PREFIX = "login_attempts : ";
 
     @Autowired
     private StringRedisTemplate redisTemplate;
