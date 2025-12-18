@@ -1,8 +1,11 @@
 package dev.anurag.JournalApp.utils;
 
+import dev.anurag.JournalApp.config.JwtConfig;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -15,11 +18,17 @@ import java.util.Map;
 @Component
 public class JwtUtil {
 
+    @Autowired
+    private JwtConfig jwtConfig;
+    private static String SECRET_KEY;
 
-    private String SECRET_KEY = "TaK+HaV^uvCHEFsEVfypW#7g9^k*Z8$V";
+
+
+
+   // private String SECRET_KEY = "TaK+HaV^uvCHEFsEVfypW#7g9^k*Z8$V";
 
     private SecretKey getSigningKey(){
-        return Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
+        return Keys.hmacShaKeyFor(JwtConfig.getSecretKey().getBytes());
     }
 
     public String extractUsername(String token) {
